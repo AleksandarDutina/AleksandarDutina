@@ -131,7 +131,7 @@ body {
   grid-template-columns: 1fr 2fr 1fr;
   gap: 30px;
   padding: 20px;
-  height: calc(100vh - 80px);
+  height: auto;
 }
 
 /* Left-aside */
@@ -154,6 +154,7 @@ body {
 h1 {
   margin-top: 0;
   margin-bottom: 20px;
+  font-size: 24px;
 }
 
 .search-icon {
@@ -275,6 +276,49 @@ h4 {
   border-radius: 10px;
 }
 
+.diagnostic-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: left;
+  margin-top: 40px;
+}
+
+.diagnostic-table thead {
+  background-color: #f6f7f8;
+  border-radius: 24px;
+  /* display: block; */
+}
+
+.diagnostic-table thead th {
+  padding: 12px;
+  border: none;
+}
+
+.diagnostic-table thead th:first-child {
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+}
+
+.diagnostic-table thead th:last-child {
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.diagnostic-table td {
+  padding: 12px;
+  border: none;
+  font-size: 14px;
+}
+
+.diagnostic-table tbody tr:nth-child(1) td {
+  padding: 20px 12px;
+}
+
+.diagnostic-table tbody tr {
+  border-bottom: 1px solid #f0eeee;
+}
+
 /* Right-aside */
 
 .right-aside {
@@ -289,10 +333,57 @@ h4 {
   padding: 20px;
   border-radius: 16px;
   text-align: center;
+  display: grid;
 }
 
-.top-aside img {
+.top-aside .big {
   margin-bottom: 20px;
+  justify-self: center;
+}
+
+.patient-dd {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.patient-dd img {
+  width: 42px;
+  height: 42px;
+}
+
+.patient-dd .patient-name {
+  font-weight: normal;
+}
+
+.patient-dd .patient-info {
+  font-weight: bold;
+  color: #072635;
+}
+
+.top-aside a {
+  text-decoration: none;
+  color: #072635;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 41px;
+  transition: all 1s;
+  border: 1px solid #ffffff;
+  width: 150px;
+  height: 21px;
+  justify-self: center;
+}
+
+.top-aside a h4 {
+  font-weight: bold;
+  margin: 0;
+}
+
+.top-aside a:hover {
+  background: #01f0d0;
 }
 
 .bottom-aside {
@@ -300,4 +391,26 @@ h4 {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 16px;
+}
+
+.lab-results {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+}
+
+.lab-result {
+  display: flex;
+  justify-content: space-between;
+}
+
+.lab-result img {
+  width: 20px;
+  height: 20px;
+}
+
+h5 {
+  font-size: 13px;
+  margin-top: 0;
+  font-weight: normal;
 }
