@@ -1,0 +1,303 @@
+body {
+  background: #f6f7f8;
+  box-sizing: border-box;
+  font-family: "Manrope";
+}
+
+/* ************* Navbar ********************* */
+
+.navbar {
+  width: auto;
+  height: 72px;
+  background: #ffffff;
+  border-radius: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navbar-left {
+  flex-basis: 20%;
+}
+
+.navbar-logo {
+  width: 211px;
+  height: 48px;
+  left: 30px;
+  position: relative;
+}
+
+.navbar-center {
+  flex-basis: 55%;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.navbar-center li {
+  margin: 0 20px;
+}
+
+.navbar-center li a {
+  text-decoration: none;
+  color: #072635;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 41px;
+  transition: all 1s;
+  border: 1px solid #ffffff;
+}
+
+.navbar-center li a:hover {
+  background-color: #01f0d0;
+  border: 1px solid #01f0d0;
+}
+
+.navbar-center li a img {
+  margin-right: 7px;
+  bottom: 3px;
+  vertical-align: middle;
+  position: relative;
+}
+
+.navbar-right {
+  flex-basis: 20%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: flex-end;
+}
+
+.profile-pic {
+  width: 44px;
+  height: 44px;
+  margin-right: 5px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 10px;
+}
+
+.profile-info .name {
+  font-weight: bold;
+  text-align: left;
+  font-size: 14px;
+}
+
+.profile-info .job {
+  font-size: 14px;
+  text-align: left;
+}
+
+.profile-last {
+  position: relative;
+  padding: 10px 0;
+}
+
+.profile-last img {
+  margin: 0 5px;
+}
+
+.profile-last img:nth-child(1) {
+  margin-left: 10px;
+}
+
+.profile-last img:nth-child(2) {
+  margin-right: 20px;
+}
+
+.profile-last::before {
+  content: "";
+  bottom: 0;
+  width: 1px;
+  height: 44px;
+  position: absolute;
+  background-color: #ededed;
+}
+
+/* *************** Navbar Finish *********** */
+
+/* **************** Main Part **************** */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 30px;
+  padding: 20px;
+  height: calc(100vh - 80px);
+}
+
+/* Left-aside */
+
+.left-aside {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.aside-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.search-icon {
+  width: 18px;
+  height: 18px;
+  padding-bottom: 10px;
+}
+
+.search-icon:hover {
+  color: #01f0d0;
+}
+
+.patient {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.patient-photo {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.patient-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.patient-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.patient-info {
+  font-size: 14px;
+  color: #707070;
+}
+
+.patient-more {
+  left: 95%;
+  position: absolute;
+}
+
+/* Main-content */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.top-section {
+  flex-grow: 2;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+.patient-deep-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.patient-detail {
+  border-radius: 12px;
+  width: 200px;
+  height: auto;
+  background: #e0f3fa;
+  padding: 20px;
+  margin-right: 20px;
+}
+
+h3 {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.patient-detail h1 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 0px;
+}
+
+.arrow-down span {
+  font-size: 14px;
+}
+
+.arrDown {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.patient-detail:nth-child(3) {
+  margin-right: 0;
+  background-color: #ffe6f1;
+}
+
+.patient-detail:nth-child(2) {
+  background-color: #ffe6e9;
+}
+
+.bottom-section {
+  flex-grow: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Right-aside */
+
+.right-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.top-aside {
+  flex-grow: 3;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.top-aside img {
+  margin-bottom: 20px;
+}
+
+.bottom-aside {
+  flex-grow: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+}
