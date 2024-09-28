@@ -6,6 +6,10 @@ body {
 
 /* ************* Navbar ********************* */
 
+button {
+  padding: 0;
+}
+
 .navbar {
   width: auto;
   height: 72px;
@@ -142,6 +146,7 @@ body {
   border-radius: 16px;
   background-color: #ffffff;
   padding: 20px;
+  height: 1000px;
 }
 
 .aside-header {
@@ -149,6 +154,33 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.patient-container {
+  overflow-y: auto;
+}
+
+/* Customizing the scrollbar for WebKit-based browsers */
+.patient-container::-webkit-scrollbar {
+  width: 6px; /* Width of the vertical scrollbar */
+  height: 6px; /* Height of the horizontal scrollbar (if needed) */
+}
+
+/* Style the scrollbar track (background) */
+.patient-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light grey background for the track */
+  border-radius: 10px;
+}
+
+/* Style the scrollbar thumb (the moving part) */
+.patient-container::-webkit-scrollbar-thumb {
+  background-color: #555; /* Darker grey for the scrollbar */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+/* Change the thumb color when hovering */
+.patient-container::-webkit-scrollbar-thumb:hover {
+  background-color: #072635; /* Darker grey on hover */
 }
 
 h1 {
@@ -172,6 +204,11 @@ h1 {
   align-items: center;
   margin-bottom: 20px;
   position: relative;
+  transition: all 0.5s;
+}
+
+.left-aside .patient:hover {
+  background-color: #d8fcf7;
 }
 
 .patient-photo {
@@ -196,7 +233,7 @@ h1 {
 }
 
 .patient-more {
-  left: 95%;
+  left: 90%;
   position: absolute;
 }
 
@@ -231,7 +268,7 @@ h1 {
   height: auto;
   background: #e0f3fa;
   padding: 20px;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 h3 {
@@ -274,6 +311,38 @@ h4 {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
+  height: 50px;
+}
+
+.tb {
+  height: 20px;
+}
+
+.scroll-thin {
+  overflow-y: auto;
+}
+
+/* Customizing the scrollbar for WebKit-based browsers */
+.scroll-thin::-webkit-scrollbar {
+  width: 6px; /* Width of the vertical scrollbar */
+  height: 6px; /* Height of the horizontal scrollbar (if needed) */
+}
+
+/* Style the scrollbar track (background) */
+.scroll-thin::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light grey background for the track */
+  border-radius: 10px;
+}
+
+/* Style the scrollbar thumb (the moving part) */
+.scroll-thin::-webkit-scrollbar-thumb {
+  background-color: #555; /* Darker grey for the scrollbar */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+/* Change the thumb color when hovering */
+.scroll-thin::-webkit-scrollbar-thumb:hover {
+  background-color: #072635; /* Darker grey on hover */
 }
 
 .diagnostic-table {
@@ -287,7 +356,6 @@ h4 {
 .diagnostic-table thead {
   background-color: #f6f7f8;
   border-radius: 24px;
-  /* display: block; */
 }
 
 .diagnostic-table thead th {
@@ -334,11 +402,14 @@ h4 {
   border-radius: 16px;
   text-align: center;
   display: grid;
+  height: 650px;
 }
 
 .top-aside .big {
   margin-bottom: 20px;
   justify-self: center;
+  width: 200px;
+  height: 200px;
 }
 
 .patient-dd {
@@ -391,12 +462,14 @@ h4 {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 16px;
+  height: 200px;
 }
 
 .lab-results {
   display: flex;
   flex-direction: column;
   padding: 0 10px;
+  height: 170px;
 }
 
 .lab-result {
