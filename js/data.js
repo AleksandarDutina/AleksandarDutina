@@ -50,28 +50,25 @@ function init() {
           // Append each patient to the container
           container.appendChild(patientDiv);
 
-          // Attach click event to each dynamically added patient
+          // Attach click functions
           patientDiv.addEventListener("click", () => {
+            // Click event to each dynamically added patient
             displayPatientData(patient);
-          });
 
-          // Click event to add Diagnostic List
-          patientDiv.addEventListener("click", () => {
+            // Click event to add Diagnostic List
             displayDiagnosticList(patient);
-          });
 
-          // Click event to add Lab Results
-          patientDiv.addEventListener("click", () => {
+            // Click event to add Lab Results
             displayLabResults(patient);
-          });
 
-          // Click event to add Diagnostic History
-          patientDiv.addEventListener("click", () => {
+            // Click event to add Diagnostic History
             displayDiagnosticHistory(patient);
+
+            // Click event to add chart
+            displayChart(patient);
           });
         });
       });
-      // });
     })
     .catch((error) => {
       console.warn(error);
@@ -195,5 +192,76 @@ function displayDiagnosticHistory(patient) {
         </div>
       </div>
     `;
+  });
+}
+
+let bloodPressureChart;
+
+// Function to add the chart
+function displayChart(patient) {
+  // const chart = document.getElementById("chart");
+
+  const months = [
+    "Oct, 2023",
+    "Nov, 2023",
+    "Dec, 2023",
+    "Jan, 2024",
+    "Feb, 2024",
+    "Mar, 2024",
+  ];
+
+  const systolicValues = [];
+  const diastolicValues = [];
+
+  // For each diagnosis history item, extract blood pressure values (systolic and diastolic)
+  patient.diagnosis_history.forEach((diagnosis) => {
+    systolicValues.push(diagnosis.blood_pressure.systolic.value);
+    diastolicValues.push(diagnosis.blood_pressure.diastolic.value);
+  });
+
+  const ctx = document.getElementById("bloodPressureChart").getContext("2d");
+
+  if (bloodPressureChart) {
+    bloodPressureChart.destroy();
+  }
+
+  bloodPressureChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: [
+        {
+          // label: "Diastolic",
+          data: diastolicValues,
+          borderColor: "#8C6FE6",
+          fill: false,
+          tension: 0.4,
+        },
+        {
+          // label: "Systolic",
+          data: systolicValues,
+          borderColor: "#E66FD2",
+          fill: false,
+          tension: 0.4,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          beginAtZero: false,
+          min: 60,
+          max: 180,
+          ticks: {
+            stepSize: 20,
+          },
+        },
+      },
+    },
   });
 }
