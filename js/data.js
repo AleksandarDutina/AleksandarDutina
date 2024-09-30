@@ -66,6 +66,9 @@ function init() {
 
             // Click event to add chart
             displayChart(patient);
+
+            // Click event to add chart data part
+            displayChartData(patient);
           });
         });
       });
@@ -231,14 +234,12 @@ function displayChart(patient) {
       labels: months,
       datasets: [
         {
-          // label: "Diastolic",
           data: diastolicValues,
           borderColor: "#8C6FE6",
           fill: false,
           tension: 0.4,
         },
         {
-          // label: "Systolic",
           data: systolicValues,
           borderColor: "#E66FD2",
           fill: false,
@@ -262,6 +263,45 @@ function displayChart(patient) {
           },
         },
       },
+      plugins: {
+        legend: {
+          display: false, // Remove the dataset legend
+        },
+      },
     },
+  });
+}
+
+// Function to add chart data part
+function displayChartData(patient) {
+  const chartDataPart = document.getElementById("chart-data-part");
+
+  chartDataPart.innerHTML = "";
+
+  patient.diagnosis_history.forEach((history) => {
+    chartDataPart.innerHTML = `
+      <div class="c-d-block">
+        <div class="c-d-block-header">
+          <div class="circle"></div>
+          <span>Systolic</span>
+        </div>        
+        <h2>${history.blood_pressure.systolic.value}</h2>
+        <div class="c-d-block-footer">
+          <img src="./img/ArrowUp.svg" alt="" />
+          <span>${history.blood_pressure.systolic.levels}</span>
+        </div>
+      </div>
+      <div class="c-d-block">
+        <div class="c-d-block-header">
+          <div class="circle"></div>
+          <span>Diastolic</span>
+        </div>
+        <h2>${history.blood_pressure.diastolic.value}</h2>
+        <div class="c-d-block-footer">
+          <img src="./img/ArrowDown.svg" alt="" />
+          <span>${history.blood_pressure.diastolic.levels}</span>
+        </div>
+      </div>        
+    `;
   });
 }

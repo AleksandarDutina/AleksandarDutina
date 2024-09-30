@@ -300,6 +300,56 @@ h1 {
 
 .chart-data-part {
   flex-basis: 30%;
+  margin-top: 13px;
+}
+
+.circle {
+  background-color: #e66fd2;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.c-d-block {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #cbc8d4;
+}
+
+.c-d-block:nth-child(2) {
+  border-bottom: none;
+  margin-top: 15px;
+}
+
+.c-d-block:nth-child(2) .circle {
+  background-color: #8c6fe6;
+}
+
+.c-d-block-header span {
+  font-size: 14px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.c-d-block h2 {
+  font-size: 22px;
+  margin-top: 5px;
+  margin-bottom: 7px;
+}
+
+.c-d-block-footer {
+  font-size: 14px;
+}
+
+.c-d-block-footer img {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.c-d-block {
+  /* display: flex;
+  flex-direction: column; */
 }
 
 .patient-deep-details {
