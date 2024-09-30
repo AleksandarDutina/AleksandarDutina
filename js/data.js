@@ -198,12 +198,10 @@ function displayDiagnosticHistory(patient) {
   });
 }
 
-let bloodPressureChart;
+let bloodPressureChart; // Declare the chart variable outside the function
 
-// Function to add the chart
-function displayChart(patient) {
-  // const chart = document.getElementById("chart");
-
+// Function to add or update the chart
+async function displayChart(patient) {
   const months = [
     "Oct, 2023",
     "Nov, 2023",
@@ -213,37 +211,73 @@ function displayChart(patient) {
     "Mar, 2024",
   ];
 
-  const systolicValues = [];
-  const diastolicValues = [];
+  // Arrays to hold systolic and diastolic values (in the correct chronological order)
+  const systolicValues = new Array(months.length).fill(null); // Initialize with null values
+  const diastolicValues = new Array(months.length).fill(null); // Initialize with null values
 
-  // For each diagnosis history item, extract blood pressure values (systolic and diastolic)
+  // Define a mapping from month names to index for the chart labels
+  const monthMap = {
+    October: 0,
+    November: 1,
+    December: 2,
+    January: 3,
+    February: 4,
+    March: 5,
+  };
+
+  // Sort diagnosis_history by year and month
+  patient.diagnosis_history.sort((a, b) => {
+    // Compare year first
+    if (a.year !== b.year) {
+      return a.year - b.year;
+    }
+    // If years are equal, compare month
+    return monthMap[a.month] - monthMap[b.month];
+  });
+
+  // For each diagnosis history item, map blood pressure values to the correct month
   patient.diagnosis_history.forEach((diagnosis) => {
-    systolicValues.push(diagnosis.blood_pressure.systolic.value);
-    diastolicValues.push(diagnosis.blood_pressure.diastolic.value);
+    const monthIndex = monthMap[diagnosis.month]; // Get the corresponding index for the month
+
+    // Populate the systolic and diastolic values based on the month
+    if (monthIndex !== undefined) {
+      systolicValues[monthIndex] = diagnosis.blood_pressure.systolic.value;
+      diastolicValues[monthIndex] = diagnosis.blood_pressure.diastolic.value;
+    }
   });
 
   const ctx = document.getElementById("bloodPressureChart").getContext("2d");
 
+  // Check if a chart already exists, and if so, destroy it before creating a new one
   if (bloodPressureChart) {
-    bloodPressureChart.destroy();
+    bloodPressureChart.destroy(); // Destroy the previous chart
   }
 
+  // Create a new chart
   bloodPressureChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: months,
+      labels: months, // X-axis labels (Months)
       datasets: [
         {
-          data: diastolicValues,
+          label: "Diastolic",
+          data: diastolicValues, // Diastolic values in the correct order
           borderColor: "#8C6FE6",
+          pointBackgroundColor: "#8C6FE6", // Point fill color for diastolic
           fill: false,
           tension: 0.4,
+          pointRadius: 5,
+          pointHoverRadius: 6,
         },
         {
-          data: systolicValues,
+          label: "Systolic",
+          data: systolicValues, // Systolic values in the correct order
           borderColor: "#E66FD2",
+          pointBackgroundColor: "#E66FD2", // Point fill color for systolic
           fill: false,
           tension: 0.4,
+          pointRadius: 5,
+          pointHoverRadius: 6,
         },
       ],
     },
@@ -251,7 +285,7 @@ function displayChart(patient) {
       scales: {
         x: {
           grid: {
-            display: false,
+            display: false, // Remove vertical grid lines
           },
         },
         y: {
