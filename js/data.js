@@ -1,13 +1,37 @@
-window.onload = init();
+function setActivePatient(patientDiv) {
+  const patientElement = document.querySelectorAll(
+    "#patient-container .patient"
+  );
+  patientElement.forEach((element) => {
+    element.classList.remove("active");
+  });
 
+  patientDiv.classList.add("active");
+
+  // Also remove 'active' class from all navbar links
+  const navbarLinks = document.querySelectorAll(".navbar-link");
+  navbarLinks.forEach((link) => {
+    link.classList.remove("active");
+  });
+
+  // Add 'active' class to the "Patients" link
+  const patientsLink = document.getElementById("fetch-patient-data");
+  patientsLink.classList.add("active");
+}
+
+window.onload = function () {
+  init(); // Call the init function to fetch data
+  // Automatically click the "Patients" link to load patient data
+  // const patientsLink = document.getElementById("fetch-patient-data");
+  // patientsLink.add("active");
+};
+
+// Fetch patient data and load it into the left-aside section
 function init() {
-  // The username and password
-  // DO NOT store credentials in your JS file like this
   let username = "coalition";
   let password = "skills-test";
   let auth = btoa(`${username}:${password}`);
 
-  // Authenticate (dummy API)
   fetch("https://fedskillstest.coalitiontechnologies.workers.dev", {
     headers: {
       Authorization: `Basic ${auth}`,
@@ -21,57 +45,48 @@ function init() {
     })
     .then((data) => {
       console.log(data);
-
       const patients = data;
+      const container = document.getElementById("patient-container");
 
-      const patientsLink = document.getElementById("fetch-patient-data");
+      // Clear the left-aside (patient list)
+      container.innerHTML = "";
 
-      // Event listener for the "Patients" navbar link
-      patientsLink.addEventListener("click", () => {
-        const container = document.getElementById("patient-container");
+      // Dynamically create patient elements
+      patients.forEach((patient, index) => {
+        const patientDiv = document.createElement("div");
+        patientDiv.className = "patient";
+        patientDiv.dataset.index = index;
+        patientDiv.innerHTML = `
+            <img class="patient-photo" src="${patient.profile_picture}" alt="${patient.name}" />
+            <div class="patient-details">
+              <span class="patient-name">${patient.name}</span>
+              <span class='patient-info'>${patient.gender}, ${patient.age}</span>
+            </div>
+            <img class="patient-more" src="./img/more_horiz_FILL0_wght300_GRAD0_opsz24.png" alt="More info" />
+          `;
 
-        // Clear the left-aside (patient list)
-        container.innerHTML = "";
+        // Append each patient to the container
+        container.appendChild(patientDiv);
 
-        // Dynamically create patient elements from data.js
-        patients.forEach((patient, index) => {
-          const patientDiv = document.createElement("div");
-          patientDiv.className = "patient";
-          patientDiv.dataset.index = index;
-          patientDiv.innerHTML = `
-              <img class="patient-photo" src="${patient.profile_picture}" alt="${patient.name}" />
-              <div class="patient-details">
-                <span class="patient-name">${patient.name}</span>
-                <span class='patient-info'>${patient.gender}, ${patient.age}</span>
-              </div>
-              <img class="patient-more" src="./img/more_horiz_FILL0_wght300_GRAD0_opsz24.png" alt="More info" />
-            `;
+        // Attach click events
+        patientDiv.addEventListener("click", () => {
+          displayPatientData(patient);
+          displayDiagnosticList(patient);
+          displayLabResults(patient);
+          displayDiagnosticHistory(patient);
+          displayChart(patient);
+          displayChartData(patient);
 
-          // Append each patient to the container
-          container.appendChild(patientDiv);
-
-          // Attach click functions
-          patientDiv.addEventListener("click", () => {
-            // Click event to each dynamically added patient
-            displayPatientData(patient);
-
-            // Click event to add Diagnostic List
-            displayDiagnosticList(patient);
-
-            // Click event to add Lab Results
-            displayLabResults(patient);
-
-            // Click event to add Diagnostic History
-            displayDiagnosticHistory(patient);
-
-            // Click event to add chart
-            displayChart(patient);
-
-            // Click event to add chart data part
-            displayChartData(patient);
-          });
+          setActivePatient(patientDiv);
         });
       });
+
+      // Automatically select the first patient
+      const firstPatient = container.querySelector(".patient");
+      if (firstPatient) {
+        firstPatient.click(); // Simulate click on the first patient
+        setActivePatient(firstPatient);
+      }
     })
     .catch((error) => {
       console.warn(error);
