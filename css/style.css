@@ -211,6 +211,7 @@ h1 {
   position: relative;
   transition: all 0.5s;
   border: 2px solid #ffffff;
+  border-radius: 15px;
 }
 
 .patient.active {
